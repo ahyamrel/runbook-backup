@@ -6,3 +6,9 @@ After running for some time runbooks backup and versioning automation I'm gladly
 2. Clone Git Repo to created Private repo.
 3. Run Powershell Script for sync (Optional in a script: configure Source Control for Runbooks)
 4. (Optional) Create a [Task scheduler to run synchronization.](https://blog.netwrix.com/2018/07/03/how-to-automate-powershell-scripts-with-task-scheduler/)
+
+Simple as that and you're ready to go :+1:
+
+## How does it look
+All runbooks are organized in a Subscription > Resource Group > Automation Account in README.md
+![All runbooks are organized in a Subscription > Resource Group > Automation Account in README.md](https://imgur.com/ZIRM6bU.png)
