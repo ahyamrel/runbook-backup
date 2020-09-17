@@ -25,7 +25,7 @@ if (-not (az account show)) {
 	Connect-AzAccount
 	} catch {
 		# Set up readme.md
-		"##Error with sync:## Could not connect Az module." >> ".\README.md"
+		"**Error with sync:** Could not connect Az module." >> ".\README.md"
 		sync-git -commit "Error - Could not connect Az module."
 		exit
 	}
