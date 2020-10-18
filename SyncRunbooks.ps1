@@ -25,7 +25,7 @@ if (-not (az account show)) {
 	Connect-AzAccount
 	} catch {
 		# Set up readme.md
-		"**Error with sync:** Could not connect Az module." >> ".\README.md"
+		"## Error with sync: ## Could not connect Az module." >> ".\README.md"
 		sync-git -commit "Error - Could not connect Az module."
 		exit
 	}
@@ -40,21 +40,28 @@ try {
 	"## Error with sync: ## Could not connect to Github account." >> ".\README.md"
 }
 
+
 Foreach ($sub in (Get-AzSubscription | Where-object	state -ne 'Disabled')) {
 	Set-AzContext -SubscriptionId $sub.id
+	$subName = $sub.Name
+	
 
 	Foreach ($rg in Get-AzResourceGroup) {
 		$rgName = $rg.ResourceGroupName
-		$account = Get-AzAutomationAccount -ResourceGroupName "$rgName"
+		$accountlist = Get-AzAutomationAccount -ResourceGroupName "$rgName"
 		
-		if ($account) {
-			Write-output ('Created Subscription dir:      {0}' -f $output.name)
-			"## Subscription: $subName" >> ".\README.md"
+		if ($accountlist) {
+			if (-not (Get-Item -path ".\$subName")) {
+				$output = New-Item -Path ".\$subName" -ItemType Directory -force
+				Write-output ('Created Subscription dir:      {0}' -f $output.name)
+				"## Subscription: $subName" >> ".\README.md"
+			}
+			
 			$output = New-Item -Path ".\$subName\$rgName" -ItemType Directory -force
 			Write-output ('Created Resource Group dir:    {0}' -f $output.name)
 			"**Resource Group: $rgName**" >> ".\README.md"
 			
-			Foreach ($account in Get-AzAutomationAccount -ResourceGroupName "$rgName") {
+			Foreach ($account in $accountlist) {
 				$accountName = $account.AutomationAccountName
 				
 				$output = New-Item -Path ".\$subName\$rgname\$accountName" -ItemType Directory -force
