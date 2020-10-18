@@ -1,4 +1,5 @@
 # runbook-backup
+<img src="https://ci.appveyor.com/api/projects/status/32r7s2skrgm9ubva?svg=true&passingText=master%20-%20WORKING" alt="Project Badge">
 After running for some time runbooks backup and versioning automation I'm gladly sharing an Open Source version of the code.
 
 ## How to Set up
